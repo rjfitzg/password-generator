@@ -13,7 +13,7 @@ digits = list(string.digits)
 symbols = list(string.punctuation)
 count = 0
 password = ""
-file = open("../Text Files/dictionary.txt", "r").readlines()
+file = open("dictionary.txt", "r").readlines()
 seperator = False
 leadingSymbol = False
 
@@ -59,9 +59,12 @@ def random():
 
     for x in range(count):
         value = randint(0, 20)
-        if (value % 20) == 0: password = password + symbols[randint(0, len(symbols) - 1)]
-        elif (value % 4) == 0: password = password + digits[randint(0, len(digits) - 1)]
-        else: password = password + characters[randint(0, len(characters) - 1)]
+        if (value % 20) == 0: # 10% symbols
+            password += symbols[randint(0, len(symbols) - 1)]
+        elif (value % 4) == 0: # 20% numbers
+            password += digits[randint(0, len(digits) - 1)]
+        else: # 70% letters
+            password += characters[randint(0, len(characters) - 1)]
     
     print("The generated password is: " + password)
 
@@ -72,8 +75,8 @@ def dictionary():
     if leadingSymbol: password = symbols[randint(0, len(symbols) - 1)]
 
     for x in range(count):
-        password = password + file[randint(0, len(file) - 1)].capitalize().rstrip("\n").replace(" ", "_")
-        if seperator and x + 1 < count: password = password + "-"
+        password += file[randint(0, len(file) - 1)].capitalize().rstrip("\n").replace(" ", "_")
+        if seperator and x + 1 < count: password += "-"
 
     print("The generated password is: " + password)
 
