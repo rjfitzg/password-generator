@@ -20,22 +20,42 @@ leadingSymbol = False
 def main():
     global count, file, seperator, leadingSymbol
 
+    if len(argumentList) == 0:
+        welcome()
+    else:
+        parse()
+
+def welcome():
+    text = ("" +
+"  _____                                    _    _____                           _             \n" +
+" |  __ \                                  | |  / ____|                         | |            \n" +
+" | |__) |_ _ ___ _____      _____  _ __ __| | | |  __  ___ _ __   ___ _ __ __ _| |_ ___  _ __ \n" + 
+" |  ___/ _` / __/ __\ \ /\ / / _ \| '__/ _` | | | |_ |/ _ \ '_ \ / _ \ '__/ _` | __/ _ \| '__|\n" + 
+" | |  | (_| \__ \__ \\ V  V / (_) | | | (_| | | |__| |  __/ | | |  __/ | | (_| | || (_) | |   \n" + 
+" |_|   \__,_|___/___/ \_/\_/ \___/|_|  \__,_|  \_____|\___|_| |_|\___|_|  \__,_|\__\___/|_|   \n\n")
+                                                                                              
+    print(text)
+    print("Choose one of the options below to generate a password.")
+    print("For additional options use the command line parameters.")
+    print("1. Random")
+    print("2. Dictionary")
+    print("3. Show all options")
+    selection = int(input("Selection: "))
+
+    if selection == 1:
+        random()
+    elif selection == 2:
+        dictionary()
+    else:
+        showOptions()
+
+def parse():
     try: 
         arguments, values = getopt.getopt(argumentList, options, long_options) 
         
         for currentArgument, currentValue in arguments: 
             if currentArgument in ("-h", "--help"): 
-                print("-r, --random            Generate a random password.")
-                print("                        Will default to 20 characters if no argument is supplied for '--count'.")
-                print("                        Example usage: password.py -c <count> -r")
-                print("-d, --dictionary        Generate a random password using a dictionary of words.")
-                print("                        Will default to 3 words if no argument is supplied for '--count'.")
-                print("                        Will default to built in dictionary if no list is supplied using '--file'.")
-                print("                        Example usage passoword.py -c <count> -file <dictionary> -d")
-                print("-c, --count             Specify the number of characters in the '--random' option or number of words in the '--dictionary' option.")
-                print("-f, --file              Specify a custom dictionary file to be used in the '--dictionary' option.")
-                print("-s, --seperator         Specify if the words in the '--dictionary' option should be seperated with a '-'.")
-                print("-l, --leadingSymbol     Specify if the password should start with a symbol in the '--dictionary' option .")
+                showOptions()
             elif currentArgument in ("-r", "--random"): 
                 random() 
             elif currentArgument in ("-d", "--dictionary"): 
@@ -79,5 +99,18 @@ def dictionary():
         if seperator and x + 1 < count: password += "-"
 
     print("The generated password is: " + password)
+
+def showOptions():
+    print("-r, --random            Generate a random password.")
+    print("                        Will default to 20 characters if no argument is supplied for '--count'.")
+    print("                        Example usage: password.py -c <count> -r")
+    print("-d, --dictionary        Generate a random password using a dictionary of words.")
+    print("                        Will default to 3 words if no argument is supplied for '--count'.")
+    print("                        Will default to built in dictionary if no list is supplied using '--file'.")
+    print("                        Example usage passoword.py -c <count> -file <dictionary> -d")
+    print("-c, --count             Specify the number of characters in the '--random' option or number of words in the '--dictionary' option.")
+    print("-f, --file              Specify a custom dictionary file to be used in the '--dictionary' option.")
+    print("-s, --seperator         Specify if the words in the '--dictionary' option should be seperated with a '-'.")
+    print("-l, --leadingSymbol     Specify if the password should start with a symbol in the '--dictionary' option .")
 
 main()
