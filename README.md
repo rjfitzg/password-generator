@@ -52,4 +52,4 @@ Will generate a password using random words from a supplied dictionary of the su
 #### With seperator
 `password.py --seperator --dictionary`
 
-`password.py -d -d`
+`password.py -s -d`
