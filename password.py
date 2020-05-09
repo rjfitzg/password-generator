@@ -107,7 +107,7 @@ def showOptions():
     print("-r, --random            Generate a random password.")
     print("                        Will default to 20 characters if no argument is supplied for '--count'.")
     print("                        Example usage: password.py -c <count> -r")
-    print("/n                        Note: Random takes precidence over dictionary, due to inherent strength advantage.
+    print("/n                        Note: Random takes precidence over dictionary, due to inherent strength advantage.")
     print("-d, --dictionary        Generate a random password using a dictionary of words.")
     print("                        Will default to 3 words if no argument is supplied for '--count'.")
     print("                        Will default to built in dictionary if no list is supplied using '--file'.")
