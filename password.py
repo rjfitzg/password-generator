@@ -54,21 +54,24 @@ def parse():
         arguments, values = getopt.getopt(argumentList, options, long_options) 
         
         for currentArgument, currentValue in arguments: 
+            # Set variables passed in.
+            if currentArgument in ("-c", "--count"): 
+                count = int(currentValue)
+            if currentArgument in ("-s", "--seperator"): 
+                seperator = True
+            if currentArgument in ("-l", "--leadingSymbol"): 
+                leadingSymbol = True
+            if currentArgument in ("-f", "--file"): 
+                file = open(currentValue, "r").readlines()
+
+            # 
             if currentArgument in ("-h", "--help"): 
                 showOptions()
+                print("showed options")
             elif currentArgument in ("-r", "--random"): 
                 random() 
             elif currentArgument in ("-d", "--dictionary"): 
-                dictionary()
-            elif currentArgument in ("-c", "--count"): 
-                count = int(currentValue)
-            elif currentArgument in ("-f", "--file"): 
-                file = open(currentValue, "r").readlines()
-            elif currentArgument in ("-s", "--seperator"): 
-                seperator = True
-            elif currentArgument in ("-l", "--leadingSymbol"): 
-                leadingSymbol = True
-                
+                dictionary()   
     except getopt.error as err: 
         print (str(err)) 
 
@@ -104,6 +107,7 @@ def showOptions():
     print("-r, --random            Generate a random password.")
     print("                        Will default to 20 characters if no argument is supplied for '--count'.")
     print("                        Example usage: password.py -c <count> -r")
+    print("/n                        Note: Random takes precidence over dictionary, due to inherent strength advantage.
     print("-d, --dictionary        Generate a random password using a dictionary of words.")
     print("                        Will default to 3 words if no argument is supplied for '--count'.")
     print("                        Will default to built in dictionary if no list is supplied using '--file'.")
@@ -113,4 +117,5 @@ def showOptions():
     print("-s, --seperator         Specify if the words in the '--dictionary' option should be seperated with a '-'.")
     print("-l, --leadingSymbol     Specify if the password should start with a symbol in the '--dictionary' option .")
 
-main()
+if __name__=="__main__":
+  main()
